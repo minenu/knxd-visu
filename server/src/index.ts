@@ -25,7 +25,7 @@ programm.version(pjson.version)
     .option('-v, --version', 'output the current version')
     .option('-p, --port <number>', 'the webservers port', '8080')
     .option('-s, --socket <type>', 'knxd unis socket', '/run/knx')
-    .option('-d, --database <type>', 'path to your database file', `${process.cwd()}/dist/data/db.json`);
+    .option('-d, --database <type>', 'path to your database file', `${process.cwd()}/server/dist/data/db.json`);
 
 /// Parse arguments
 programm.parse(process.argv);

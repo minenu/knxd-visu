@@ -2,13 +2,14 @@
   "name": "knxd-visu",
   "version": "1.0.0",
   "description": "KNXD Visu",
-  "main": "index.js",
+  "main": "server/dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:server": "cd server && npm run build",
     "build:client": "cd client && ng build --prod",
     "build": "npm run build:client && npm run copy:client && npm run build:server",
-    "copy:client": "rm -rf server/dist/public && cp -rf client/dist/client server/dist/public"
+    "copy:client": "rm -rf server/dist/public && cp -rf client/dist/client server/dist/public",
+    "install:server": "cd server && npm install"
   },
   "repository": {
     "type": "git",
