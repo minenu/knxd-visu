@@ -1,0 +1,103 @@
+// Import library functions for theme creation.
+@import '~@angular/material/theming';
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin visu($theme) {
+
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+    $is-dark-theme: map-get($theme, is-dark);
+
+    html, body {
+        font-family: 'Roboto';
+        padding: 0;
+        margin: 0;
+    }
+
+    .muted {
+        opacity: 0.5;
+    }
+
+    .border-top { border-top: solid 1px #ccc; }
+
+    .bg-default { background-color: mat-color($background, background) }
+    .bg-accent { background-color: mat-color($accent) }
+    .bg-app-bar { background-color: mat-color($background, app-bar) }
+
+    // Connection Lost
+    .connection-lost {
+        @extend .p-3;
+        border-radius: 8px;
+        // Use the primary text on the dark theme, even though the lighter one uses
+        // a secondary, because the contrast on the light primary text is poor.
+        color: if($is-dark-theme, $dark-primary-text, $light-secondary-text);
+        background: if($is-dark-theme, map-get($mat-grey, 50), #323232);
+    }
+
+    // ControlDef
+    .control-def-bar {
+        background-color: mat-color($background, app-bar);
+        margin: 0 -16px;
+        padding: 0 16px;
+    }
+
+    // Table Styles
+    .table-container {
+        overflow: auto;
+    }
+
+    .data-table {
+        width: 100%;
+        tr {
+            td {
+                @extend .px-1;
+                &:first-child {
+                    text-align: right;
+                }
+                &:last-child {
+                    font-weight: bold;
+                    width: 90%
+                }
+            }
+        }
+    }
+
+    // MAT DIALOG
+    .mat-dialog-container {
+        min-width: 250px;
+    }
+
+    // MAT LIST
+    .mat-action-list {
+        .mat-list-item {
+            &.active {
+                background-color: mat-color($primary);
+                color: mat-color($primary, 'default-contrast')
+            }
+        }
+    }
+
+    // MAT FORM FIELD
+    .mat-form-field {
+        font-size: 13px;
+        .mat-form-field-infix {
+            width: 100% !important;
+        }
+    }
+
+    // MAT BUTTON
+    .mat-button-wrapper {
+        fa-icon + span {
+            @extend .pl-1;
+        }
+    }
+
+    // MAT CHIP LIST
+    input.mat-chip-input {
+        margin: 4px 0 !important;
+    }
+}
+

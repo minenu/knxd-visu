@@ -1,0 +1,92 @@
+<h1 mat-dialog-title>Control Definition</h1>
+<mat-dialog-content>
+    <form [formGroup]="form" (ngSubmit)="submit()" fxLayout="column" fxLayoutGap="8px">
+
+        <mat-form-field>
+            <mat-label>Gad</mat-label>
+            <input type="text" matInput formControlName="gad">
+            <mat-error>{{ formError('gad') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Listener GADs</mat-label>
+            <mat-chip-list #chipList>
+                <mat-chip *ngFor="let gad of listenerGads"
+                    [selectable]="false"
+                    [removable]="true"
+                    (removed)="removeListenerGad(gad)">{{ gad }}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+            <input [matChipInputFor]="chipList"
+                [matChipInputAddOnBlur]="true"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="addListenerGad($event)">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="type">
+                <mat-option *ngFor="let type of types" [value]="type">{{ type }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Label</mat-label>
+            <input type="text" matInput formControlName="label">
+            <mat-error>{{ formError('label') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Room</mat-label>
+            <input type="text" matInput formControlName="room" [matAutocomplete]="roomsAutocomplete">
+            <mat-error>{{ formError('room') }}</mat-error>
+        </mat-form-field>
+
+        <mat-autocomplete #roomsAutocomplete="matAutocomplete">
+            <mat-option *ngFor="let option of filteredRooms$ | async" [value]="option">{{ option }}</mat-option>
+        </mat-autocomplete>
+
+        <mat-form-field>
+            <mat-label>Category</mat-label>
+            <input type="text" matInput formControlName="category" [matAutocomplete]="categoryAutocomplete">
+            <mat-error>{{ formError('category') }}</mat-error>
+        </mat-form-field>
+
+        <mat-autocomplete #categoryAutocomplete="matAutocomplete">
+            <mat-option *ngFor="let option of filteredCategories$ | async" [value]="option">{{ option }}</mat-option>
+        </mat-autocomplete>
+
+        <mat-form-field>
+            <mat-label>Icon</mat-label>
+            <input type="text" matInput formControlName="icon" [matAutocomplete]="iconAutocomplete">
+            <mat-error>{{ formError('icon') }}</mat-error>
+            <mat-icon matSuffix>{{ form.get('icon').value }}</mat-icon>
+        </mat-form-field>
+
+        <mat-autocomplete #iconAutocomplete="matAutocomplete">
+            <mat-option *ngFor="let option of filteredIcons$ | async" [value]="option">
+                <div fxLayout fxLayoutAlign="start center" fxLayoutGap="8px">
+                    <mat-icon>{{ option }}</mat-icon>
+                    <span>{{ option }}</span>
+                </div>
+            </mat-option>
+        </mat-autocomplete>
+
+        <mat-form-field>
+            <mat-label>Suffix</mat-label>
+            <input type="text" matInput formControlName="suffix">
+            <mat-error>{{ formError('suffix') }}</mat-error>
+            <mat-hint align="end">Will be appended to displayed value.</mat-hint>
+        </mat-form-field>
+
+        <input type="submit" hidden>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div class="w-100" fxLayout fxLayoutAlign="end" fxLayoutGap="8px">
+        <button mat-raised-button (click)="dismiss()">Cancel</button>
+        <button mat-raised-button color="primary" (click)="submit()">Save</button>
+    </div>
+</mat-dialog-actions>

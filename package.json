@@ -1,0 +1,33 @@
+{
+  "name": "knxd-visu",
+  "version": "1.0.0",
+  "description": "KNXD Visu",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:server": "cd server && npm run build",
+    "build:client": "cd client && ng build --prod",
+    "build": "npm run build:client && npm run copy:client && npm run build:server",
+    "copy:client": "rm -rf server/dist/public && cp -rf client/dist/client server/dist/public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minenu/knxd-visu.git"
+  },
+  "keywords": [
+    "KNXD",
+    "Visu",
+    "Typescript",
+    "Javascript",
+    "Socket"
+  ],
+  "author": "Gernot Lausegger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/minenu/knxd-visu/issues"
+  },
+  "homepage": "https://github.com/minenu/knxd-visu#readme",
+  "dependencies": {
+    "copyfiles": "^2.2.0"
+  }
+}

@@ -1,0 +1,14 @@
+<nav mat-tab-nav-bar>
+    <a mat-tab-link [routerLink]="['control-definitions']"
+        routerLinkActive #rlb="routerLinkActive"
+        [active]="rlb.isActive">
+        Visu Controls
+    </a>
+    <a mat-tab-link [routerLink]="['logging']"
+        routerLinkActive #rla="routerLinkActive"
+        [active]="rla.isActive">
+        Logging
+    </a>
+</nav>
+
+<router-outlet></router-outlet>

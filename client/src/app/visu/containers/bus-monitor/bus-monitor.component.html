@@ -1,0 +1,54 @@
+<!-- XS -->
+<div fxHide.gt-xs>
+    <div ngClass.xs="px-2 py-1" ngClass.gt-xs="px-3" fxLayout fxLayoutAlign="space-between center">
+        <div>
+            <div class="mat-h1 my-0">Bus Monitor</div>
+            <span class="mat-small muted">
+                Showing the last <b>{{ busMonitorLimit$ | async }}</b> bus messages.
+            </span>
+        </div>
+        <div>
+            <button mat-icon-button (click)="clearGroupSocketMessages()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <visu-group-socket-message-list
+        [groupSocketMessages]="groupSocketMessages$ | async"
+        [controlDefs]="controlDefs$ | async"
+        (clearGroupSocketMessages)="clearGroupSocketMessages()"
+        (createControlDef)="createControlDef($event)">
+    </visu-group-socket-message-list>
+</div>
+
+<!-- GT-XS -->
+<div fxHide.xs class="px-3">
+    <h1>Bus Monitor</h1>
+    <div fxLayout fxLayoutGap="24px">
+        <div fxFlex="33.3" fxLayout="column" fxLayoutGap="24px">
+            <visu-bus-controller
+                [controlDefs]="controlDefs$ | async"
+                (groupSocketMessage)="groupSocketMessage($event)">
+            </visu-bus-controller>
+        </div>
+
+        <div fxFlex="66.6">
+
+            <div class="pb-2" fxLayout fxLayoutAlign="space-between center">
+                <div></div>
+                <button mat-icon-button (click)="clearGroupSocketMessages()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+
+            <visu-group-socket-message-list
+                [groupSocketMessages]="groupSocketMessages$ | async"
+                [controlDefs]="controlDefs$ | async"
+                (clearGroupSocketMessages)="clearGroupSocketMessages()"
+                (createControlDef)="createControlDef($event)">
+            </visu-group-socket-message-list>
+        </div>
+
+    </div>
+</div>

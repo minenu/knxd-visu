@@ -1,0 +1,38 @@
+<!-- XS -->
+<div *ngIf="coreService.isMobile$ | async">
+    <!--form [formGroup]="form" class="mat-elevation-z2 p-2">
+        <mat-radio-group aria-label="Group By" formControlName="groupBy">
+            <mat-radio-button value="room">Room</mat-radio-button>
+            <mat-radio-button class="pl-2" value="category">Category</mat-radio-button>
+        </mat-radio-group>
+    </form-->
+    <div ngClass.xs="px-2 py-1" ngClass.gt-xs="px-3" fxLayout fxLayoutAlign="space-between center">
+        <div>
+            <div class="mat-h1 my-0">Dashboard</div>
+        </div>
+        <!--div>
+            <button mat-icon-button (click)="clearGroupSocketMessages()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div-->
+    </div>
+
+    <ng-container [ngTemplateOutlet]="list"></ng-container>
+</div>
+
+<!-- GT-XS -->
+<div *ngIf="!(coreService.isMobile$ | async)" class="px-3">
+    <h1>Dashboard</h1>
+    <ng-container [ngTemplateOutlet]="list"></ng-container>
+</div>
+
+<ng-template #list>
+    <mat-list>
+        <ng-container *ngFor="let controlGroup of controlGroups$ | async">
+            <div mat-subheader>{{ controlGroup }}</div>
+            <mat-list-item *ngFor="let controlDef of getControlDefs(controlGroup)">
+                <visu-control-wrapper [controlDef]="controlDef"></visu-control-wrapper>
+            </mat-list-item>
+        </ng-container>
+    </mat-list>
+</ng-template>

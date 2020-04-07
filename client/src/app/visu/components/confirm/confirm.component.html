@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>{{ data?.title }}</h1>
+<mat-dialog-content>
+    <span [innerHTML]="data?.message"></span>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="w-100" fxLayout fxLayoutAlign="end" fxLayoutGap="8px">
+        <button mat-raised-button [mat-dialog-close]="false">Cancel</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="true">OK</button>
+    </div>
+</mat-dialog-actions>

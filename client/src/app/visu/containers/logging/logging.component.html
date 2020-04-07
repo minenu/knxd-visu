@@ -1,0 +1,29 @@
+<div ngClass.xs="px-2 py-1" ngClass.gt-xs="p-3" fxLayout fxLayoutAlign="space-between center">
+    <div>
+        <div class="mat-h1 my-0">Logging</div>
+        <span class="mat-small muted">
+            <b>{{ (loggingGads$ | async)?.length }}</b> controls will be tracked.
+        </span>
+    </div>
+    <div></div>
+</div>
+
+<div ngClass.gt-xs="px-3">
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let controlDef of loggingControlDefs$ | async"
+            (opened)="panelOpened(controlDef)">
+            <mat-expansion-panel-header>
+                <div fxLayout fxLayoutGap="8px" fxLayoutAlign="start center">
+                    <mat-icon>{{ controlDef.icon }}</mat-icon>
+                    <span class="mat-small muted" style="width: 50px; text-align: center;">{{ controlDef.gad }}</span>
+                    <span>{{ controlDef.label }}</span>
+                </div>
+            </mat-expansion-panel-header>
+
+            <visu-control-history [logs]="logData$ | async"
+                [controlDef]="controlDef">
+            </visu-control-history>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

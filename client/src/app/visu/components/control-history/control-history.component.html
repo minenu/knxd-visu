@@ -1,0 +1,18 @@
+<div fxLayout fxLayoutGap="24px">
+    <div fxFlex="60" style="height: 400px;">
+        <ngx-charts-line-chart
+            [scheme]="colorScheme"
+            [curve]="curve"
+            [xAxis]="true"
+            [yAxis]="true"
+            [xAxisLabel]="true"
+            [yAxisLabel]="true"
+            [timeline]="true"
+            [results]="chartData">
+        </ngx-charts-line-chart>
+    </div>
+
+    <div fxFlex="40">
+        <visu-control-wrapper [controlDef]="controlDef$ | async"></visu-control-wrapper>
+    </div>
+</div>

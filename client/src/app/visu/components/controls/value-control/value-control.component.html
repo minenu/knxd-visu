@@ -1,0 +1,10 @@
+<div fxLayout fxLayoutGap="8px" fxLayoutAlign="space-between center">
+    <div fxLayout fxLayoutGap="12px" fxLayoutAlign="start center">
+        <mat-icon>{{ icon }}</mat-icon>
+        <span>{{ controlDef?.label }}</span>
+    </div>
+    <div *ngIf="hasValue">
+        <b>{{ formattedValue }}</b>
+        <span *ngIf="controlDef.suffix" style="padding-left: 3px">{{ controlDef?.suffix }}</span>
+    </div>
+</div>

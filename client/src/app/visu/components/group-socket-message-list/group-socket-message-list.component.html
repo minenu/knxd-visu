@@ -1,0 +1,47 @@
+<mat-card *ngIf="!dataSource?.data?.length">
+    <mat-card-content>No Messages recorded.</mat-card-content>
+
+</mat-card>
+
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let msg of dataSource.data; first as first">
+        <mat-expansion-panel-header>
+            <div fxLayout fxLayoutGap="8px" fxLayoutAlign="start center"
+                style="width: 90% !important"
+                [class.muted]="!isMapped(msg)">
+                <mat-icon>{{ getIcon(msg) }}</mat-icon>
+                <span style="flex-grow: 2">{{ msg.action }}</span>
+                <span class="mat-small pl-2">{{ msg.datetime | date: 'HH:mm:ss' }}</span>
+            </div>
+        </mat-expansion-panel-header>
+
+        <table class="mat-table data-table">
+            <tr>
+                <td>Source</td>
+                <td>{{ msg.src }}</td>
+            </tr>
+            <tr>
+                <td>Dest</td>
+                <td>
+                    {{ getGadName(msg) }}
+                    <span class="ml-1 mat-small">{{ msg.dest }}</span>
+                </td>
+            </tr>
+            <tr *ngIf="msg.action !== 'read'">
+                <td>Type</td>
+                <td>{{ msg.type }}</td>
+            </tr>
+            <tr *ngIf="msg.action !== 'read'">
+                <td>Value</td>
+                <td>{{ msg.val }}</td>
+            </tr>
+        </table>
+
+        <div class="pt-2" fxLayout fxLayoutAlign="end" *ngIf="!isMapped(msg)">
+            <button mat-raised-button color="primary" (click)="createControlDef.emit(msg)">
+                Create Control Def
+            </button>
+        </div>
+
+    </mat-expansion-panel>
+</mat-accordion>

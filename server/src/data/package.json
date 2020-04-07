@@ -1,0 +1,43 @@
+{
+  "name": "knxd-server",
+  "version": "0.2.0",
+  "description": "KNXD Webserver",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon dist/index.js",
+    "build:dev": "tsc --watch",
+    "dev": "concurrently \"npm:build:dev\" \"npm:start:dev\"",
+    "build": "tsc && yarn run copy:files",
+    "copy:files": "yarn run copy:package && yarn run copy:public",
+    "copy:package": "copyfiles -f \"./package.json\" \"./src/data\"",
+    "copy:public": "copyfiles -f \"./src/public/*\" \"./dist/public\""
+  },
+  "keywords": [
+    "knxd",
+    "websocket",
+    "visu"
+  ],
+  "author": "Gernot Lausegger",
+  "license": "ISC",
+  "dependencies": {
+    "@types/socket.io": "^2.1.4",
+    "chalk": "^3.0.0",
+    "commander": "^5.0.0",
+    "cors": "^2.8.5",
+    "eibd": "^0.4.3",
+    "express": "^4.17.1",
+    "find-process": "^1.4.3",
+    "lodash-id": "^0.14.0",
+    "lowdb": "^1.0.0",
+    "rxjs": "^6.5.4",
+    "socket.io": "^2.3.0",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.3",
+    "@types/node": "^13.9.2",
+    "concurrently": "^5.1.0",
+    "copyfiles": "^2.2.0",
+    "nodemon": "^2.0.2"
+  }
+}

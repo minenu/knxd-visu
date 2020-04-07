@@ -1,0 +1,74 @@
+<div ngClass.xs="px-2 py-1" ngClass.gt-xs="p-3" fxLayout fxLayoutAlign="space-between center">
+    <div>
+        <div class="mat-h1 my-0">Visu Controls</div>
+        <span class="mat-small muted">
+            <b>{{ (controlDefs$ | async)?.length }}</b> registered controls found.
+        </span>
+    </div>
+    <div>
+        <button mat-icon-button (click)="showForm()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+</div>
+
+<div ngClass.gt-xs="px-3">
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let controlDef of controlDefs$ | async"
+            (opened)="expandedGad = controlDef.gad"
+            [expanded]="controlDef.gad === expandedGad">
+            <mat-expansion-panel-header>
+                <div fxLayout fxLayoutGap="8px" fxLayoutAlign="start center">
+                    <mat-icon>{{ controlDef.icon }}</mat-icon>
+                    <mat-icon>{{ isLogged(controlDef) ? 'sync_alt' : null }}</mat-icon>
+                    <span class="mat-small muted" style="width: 50px; text-align: center;">{{ controlDef.gad }}</span>
+                    <span>{{ controlDef.label }}</span>
+                </div>
+            </mat-expansion-panel-header>
+
+            <div>
+                <div fxLayout fxLayoutAlign="space-between center" class="control-def-bar">
+                    <div>
+                        <button mat-icon-button (click)="showForm(controlDef)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="delete(controlDef)">
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </div>
+                    <div fxLayout fxLayoutGap="8px" fxLayoutAlign="start center">
+                        <span class="mat-small" [class.muted]="!isLogged(controlDef)">
+                            {{ isLogged(controlDef) ? 'Logging Enabled' : 'Logging Disabled' }}
+                        </span>
+                        <button mat-icon-button (click)="toggleLogged(controlDef)">
+                            <mat-icon>{{ isLogged(controlDef) ? 'toggle_on' : 'toggle_off' }}</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <table class="pt-2 mat-table data-table">
+                    <tr>
+                        <td>Listeners</td>
+                        <td>{{ controlDef?.listenerGads }}</td>
+                    </tr>
+                    <tr>
+                        <td>Type</td>
+                        <td>{{ controlDef.type }}</td>
+                    </tr>
+                    <tr>
+                        <td>Room</td>
+                        <td>{{ controlDef.room }}</td>
+                    </tr>
+                    <tr>
+                        <td>Category</td>
+                        <td>{{ controlDef.category }}</td>
+                    </tr>
+                    <tr>
+                        <td>Suffix</td>
+                        <td>{{ controlDef.suffix }}</td>
+                    </tr>
+                </table>
+            </div>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

@@ -1,0 +1,47 @@
+<div class="visu-container" [class.app-is-mobile]="mobileQuery.matches">
+    <mat-toolbar [color]="connected ? 'primary' : 'warn'" class="visu-toolbar" fxLayout fxLayoutAlign="space-between center">
+        <div fxLayout fxLayoutGap="8px" fxLayoutAlign="start center">
+            <button mat-icon-button (click)="snav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+
+            <div class="visu-title" fxLayout="column" fxLayoutGap="4px">
+                <span class="visu-name">KNXD Visu</span>
+                <span class="visu-datetime">{{ now$ | async | date: 'EEEEEE dd.MM. HH:mm' }}</span>
+            </div>
+        </div>
+
+        <div fxLayout fxLayoutGap="8px" fxLayoutAlign="start center">
+            <button mat-icon-button [matTooltip]="connected ? 'Connected' : 'Disconnected'">
+                <mat-icon>{{ connected ? 'link': 'unlink' }}</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="visu-sidenav-container">
+        <mat-sidenav class="visu-sidenav" #snav
+            [mode]="mobileQuery.matches ? 'over' : 'side'"
+            [fixedInViewport]="mobileQuery.matches"
+            fixedTopGap="56"
+            [opened]="mobileQuery.matches ? false : true">
+            <mat-nav-list>
+                <a mat-list-item (click)="navigate(['.'])">
+                    <mat-icon>view_quilt</mat-icon>
+                    <span class="pl-1">Dashboard</span>
+                </a>
+                <a mat-list-item (click)="navigate(['bus-monitor'])">
+                    <mat-icon>laptop</mat-icon>
+                    <span class="pl-1">Bus Monitor</span>
+                </a>
+                <a mat-list-item (click)="navigate(['masterdata'])">
+                    <mat-icon>settings</mat-icon>
+                    <span class="pl-1">Master Data</span>
+                </a>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content fxLayout="column">
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

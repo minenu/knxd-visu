@@ -1,0 +1,49 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Write to bus</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="form" fxLayout="column" fxLayoutGap="8px">
+            <mat-form-field>
+                <mat-label>GAD</mat-label>
+                <input type="text" matInput formControlName="dest" [matAutocomplete]="auto">
+            </mat-form-field>
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let controlDef of filteredControlDefs$ | async" [value]="controlDef.gad">
+                    {{ controlDef.label }}
+                </mat-option>
+            </mat-autocomplete>
+
+            <mat-form-field>
+                <mat-label>Action</mat-label>
+                <mat-select formControlName="action">
+                    <mat-option *ngFor="let action of actions" [value]="action">{{ action }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Type</mat-label>
+                <mat-select formControlName="type">
+                    <mat-option *ngFor="let option of dptOptions" [value]="option">
+                        {{ option }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <ng-container [ngSwitch]="form.get('type').value">
+                <mat-form-field *ngSwitchDefault>
+                    <mat-label>Value</mat-label>
+                    <input matInput type="text" formControlName="val">
+                </mat-form-field>
+
+            </ng-container>
+
+
+            <input type="submit()" hidden>
+
+            <button mat-raised-button color="primary" (click)="send()" [disabled]="form.invalid">
+                Send
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>
