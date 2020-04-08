@@ -31,11 +31,12 @@ export class SocketService {
         this.socket.on('groupSocketMessage', (groupSocketMessage: GroupSocketMessage) => {
             this.store.dispatch(SocketActions.groupSocketMessage({ groupSocketMessage }));
             this.groupSocketMessage$.next(groupSocketMessage);
+            console.log('msg', groupSocketMessage.action, groupSocketMessage.dest, groupSocketMessage.val);
         });
 
         /// Main Internals
         this.socket.on('connect', () => {
-            setTimeout(() => { this.connected$.next(true); }, 500);
+            setTimeout(() => { this.connected$.next(true); }, 0);
         });
         this.socket.on('disconnect', () => this.connected$.next(false));
     }

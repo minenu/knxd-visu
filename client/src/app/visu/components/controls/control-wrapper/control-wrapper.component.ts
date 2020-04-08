@@ -4,7 +4,7 @@ import { ControlDef } from '../../../models';
 @Component({
     selector: 'visu-control-wrapper',
     templateUrl: 'control-wrapper.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.Default
 })
 
 export class ControlWrapperComponent {

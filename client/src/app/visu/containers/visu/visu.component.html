@@ -4,11 +4,7 @@
             <button mat-icon-button (click)="snav.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
-
-            <div class="visu-title" fxLayout="column" fxLayoutGap="4px">
-                <span class="visu-name">KNXD Visu</span>
-                <span class="visu-datetime">{{ now$ | async | date: 'EEEEEE dd.MM. HH:mm' }}</span>
-            </div>
+            <span class="visu-datetime">{{ now$ | async | date: 'EEEEEE dd.MM. HH:mm':'Europe/Vienna' }}</span>
         </div>
 
         <div fxLayout fxLayoutGap="8px" fxLayoutAlign="start center">
