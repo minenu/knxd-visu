@@ -4,11 +4,12 @@
   "description": "KNXD Webserver",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon dist/index.js",
+    "start:dev": "nodemon ../dist/index.js",
     "build:dev": "tsc --watch",
     "dev": "concurrently \"npm:build:dev\" \"npm:start:dev\"",
-    "build": "tsc && yarn run copy:package",
-    "copy:package": "copyfiles -f \"./package.json\" \"./dist/data\""
+    "build": "tsc && npm run copy:package && npm run copy:nodeModules",
+    "copy:package": "copyfiles -f \"./package.json\" \"../dist/data\"",
+    "copy:nodeModules": "cp -R node_modules ../dist"
   },
   "keywords": [
     "knxd",
