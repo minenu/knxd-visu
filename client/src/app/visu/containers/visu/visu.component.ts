@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Store, select } from '@ngrx/store';
-import { first, map } from 'rxjs/operators';
+import { first, map, filter } from 'rxjs/operators';
 import * as fromVisu from '../../reducers';
 import * as ControlDefActions from '../../actions/control-def.actions';
 import * as LoggingActions from '../../actions/logging.actions';
 import { SocketService } from '../../services/socket.service';
-import { Subscription } from 'rxjs';
+import { Subscription, combineLatest } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 import { CoreService } from '../../services/core.service';
@@ -62,13 +62,31 @@ export class VisuComponent implements OnInit, OnDestroy {
         });
 
         /// Load ControlDefs
-        this.store.dispatch(ControlDefActions.load());
+        this.controlDefs$.pipe(first()).subscribe(controlDefs => {
+            if (!controlDefs.length) {
+                this.store.dispatch(ControlDefActions.load());
+            }
+        });
 
         /// Check for Connection
         this.subscriptions.push(
             this.socketService.connected$.subscribe(c => {
                 this.connected = c;
                 this.changeDetectorRef.detectChanges();
+            })
+        );
+
+        /// Make a groupRead onConnect
+        this.subscriptions.push(
+            combineLatest([
+                this.socketService.connected$,
+                this.controlDefs$
+            ]).pipe(
+                filter(([connected, controlDefs]) => connected && controlDefs.length > 0)
+            ).subscribe(([ , controlDefs]) => {
+                controlDefs.map(cd => cd.gad).forEach(gad => {
+                    this.socketService.groupRead(gad);
+                });
             })
         );
 

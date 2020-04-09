@@ -45,7 +45,6 @@ export class LoggingComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         /// Load Data
         this.store.dispatch(LoggingActions.loadLoggingGads());
-        this.store.dispatch(ControlDefActions.load());
 
         this.subscriptions.push(
             this.selectedControlDef$.subscribe(x => this.selectedControlDef = x)

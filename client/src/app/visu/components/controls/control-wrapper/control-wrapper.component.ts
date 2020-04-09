@@ -1,5 +1,5 @@
-import { Component, ChangeDetectionStrategy, Input, HostBinding } from '@angular/core';
-import { ControlDef } from '../../../models';
+import { Component, ChangeDetectionStrategy, Input, HostBinding, Output, EventEmitter } from '@angular/core';
+import { ControlDef, ControlValue, GroupSocketMessage } from '../../../models';
 
 @Component({
     selector: 'visu-control-wrapper',
@@ -10,4 +10,6 @@ import { ControlDef } from '../../../models';
 export class ControlWrapperComponent {
     @HostBinding('class') private c = 'w-100';
     @Input() controlDef: ControlDef;
+    @Input() controlValues: ControlValue[];
+    @Output() groupSocketMessage = new EventEmitter<GroupSocketMessage>();
 }

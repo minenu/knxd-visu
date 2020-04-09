@@ -1,37 +1,17 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, forwardRef, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl } from '../abstract-control';
-import { SocketService } from '../../../services/socket.service';
 import * as _ from 'lodash';
 
 @Component({
     selector: 'visu-value-control',
     templateUrl: 'value-control.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    viewProviders: [{
-        provide: AbstractControl,
-        useExisting: forwardRef(() => ValueControlComponent)
-    }]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ValueControlComponent extends AbstractControl implements OnDestroy {
-    @Input() suffix: string;
+export class ValueControlComponent extends AbstractControl {
 
-    get formattedValue(): number {
-        try {
-            return Math.round(+this.value * 10) / 10;
-        } catch (ex) {
-            return this.value;
-        }
+    get formattedValue(): string {
+        return _.isNumber(this.value) ? _.round(this.value, 1) : this.value;
     }
 
-    constructor(
-        public socketService: SocketService,
-        public cdr: ChangeDetectorRef
-    ) {
-        super(socketService, cdr);
-    }
-
-    ngOnDestroy(): void {
-        super.ngOnDestroy();
-    }
 }

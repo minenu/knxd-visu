@@ -31,7 +31,10 @@
         <ng-container *ngFor="let controlGroup of controlGroups$ | async">
             <div mat-subheader>{{ controlGroup }}</div>
             <mat-list-item *ngFor="let controlDef of getControlDefs(controlGroup)">
-                <visu-control-wrapper [controlDef]="controlDef"></visu-control-wrapper>
+                <visu-control-wrapper [controlDef]="controlDef"
+                    [controlValues]="controlValues$ | async"
+                    (groupSocketMessage)="groupSocketMessage($event)">
+                </visu-control-wrapper>
             </mat-list-item>
         </ng-container>
     </mat-list>

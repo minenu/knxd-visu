@@ -3,8 +3,9 @@ import { connect } from 'socket.io-client';
 import { Store } from '@ngrx/store';
 import * as fromVisu from '../reducers';
 import * as SocketActions from '../actions/socket.actions';
+import * as ControlValueActions from '../actions/control-value.actions';
 import { environment } from '../../../environments/environment';
-import { GroupSocketMessage } from '../models';
+import { GroupSocketMessage, ControlValue } from '../models';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, first } from 'rxjs/operators';
 
@@ -30,8 +31,9 @@ export class SocketService {
         /// GroupSocketListener
         this.socket.on('groupSocketMessage', (groupSocketMessage: GroupSocketMessage) => {
             this.store.dispatch(SocketActions.groupSocketMessage({ groupSocketMessage }));
+            this.store.dispatch(ControlValueActions.set({ controlValue: new ControlValue(groupSocketMessage.dest, groupSocketMessage.val) }));
             this.groupSocketMessage$.next(groupSocketMessage);
-            console.log('msg', groupSocketMessage.action, groupSocketMessage.dest, groupSocketMessage.val);
+            // console.log('msg', groupSocketMessage.action, groupSocketMessage.dest, groupSocketMessage.val);
         });
 
         /// Main Internals
@@ -42,7 +44,7 @@ export class SocketService {
     }
 
     public groupSocketMessage(data: any): void {
-        console.log('send:msg', data);
+        // console.log('send:msg', data);
         this.socket.emit('groupSocketMessage', data);
     }
 

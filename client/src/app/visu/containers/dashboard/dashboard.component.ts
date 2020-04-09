@@ -6,8 +6,9 @@ import * as fromVisu from '../../reducers';
 import * as ControlDefActions from '../../actions/control-def.actions';
 import { map, switchMap } from 'rxjs/operators';
 import * as _ from 'lodash';
-import { ControlDef } from '../../models';
+import { ControlDef, GroupSocketMessage } from '../../models';
 import { FormGroup, FormControl } from '@angular/forms';
+import { SocketService } from '../../services/socket.service';
 
 @Component({
     selector: 'visu-dashboard',
@@ -16,6 +17,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 export class DashboardComponent implements OnInit, OnDestroy {
     controlDefs$ = this.store.pipe(select(fromVisu.selectAllControlDefs));
+    controlValues$ = this.store.pipe(select(fromVisu.selectAllControlValues));
 
     form = new FormGroup({
         groupBy: new FormControl('room')
@@ -37,12 +39,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     constructor(
         private store: Store<fromVisu.AppState>,
-        public coreService: CoreService
+        public coreService: CoreService,
+        private socketService: SocketService
     ) {}
 
     ngOnInit(): void {
-        this.store.dispatch(ControlDefActions.load());
-
         /// Create a ControlDef Snapshot
         this.subscriptions.push(
             this.controlDefs$.subscribe(x => this.controlDefs = x)
@@ -55,5 +56,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     getControlDefs(groupName: string): ControlDef[] {
         return (this.controlDefs || []).filter(controlDef => controlDef[this.form.get('groupBy').value] === groupName);
+    }
+
+    groupSocketMessage(msg: GroupSocketMessage): void {
+        this.socketService.groupSocketMessage(msg);
     }
 }

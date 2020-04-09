@@ -4,6 +4,7 @@
   "description": "KNXD Visu",
   "main": "dist/index.js",
   "scripts": {
+    "start": "cd client && npm start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:server": "cd server && npm run build",
     "build:client": "cd client && ng build --prod",

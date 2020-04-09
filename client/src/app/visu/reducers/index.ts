@@ -1,10 +1,12 @@
 import { createSelector } from '@ngrx/store';
 import * as fromControlDef from './control-def.reducer';
+import * as fromControlValue from './control-value.reducer';
 import * as fromLogging from './logging.reducer';
 import * as fromSocket from './socket.reducer';
 
 export interface VisuState {
     controlDef: fromControlDef.State;
+    controlValue: fromControlValue.State;
     logging: fromLogging.State;
     socket: fromSocket.State;
 }
@@ -15,6 +17,7 @@ export interface AppState {
 
 export const reducers = {
     controlDef: fromControlDef.reducer,
+    controlValue: fromControlValue.reducer,
     logging: fromLogging.reducer,
     socket: fromSocket.reducer
 };
@@ -43,6 +46,20 @@ export const selectSelectedControlDef = createSelector(
     createSelector(selectControlDefState, (state: fromControlDef.State) => state.selectedGad),
     (entities, gad) => entities[gad]
 );
+
+/**************************************************************
+ * CONTROL Value
+ **************************************************************/
+const selectControlValueState = createSelector(
+    selectVisuState,
+    (state: VisuState) => state.controlValue
+);
+
+/// Map EntityAdapter
+export const {
+    selectAll: selectAllControlValues
+} = fromControlValue.adapter.getSelectors(selectControlValueState);
+
 
 /**************************************************************
  * LOGGING

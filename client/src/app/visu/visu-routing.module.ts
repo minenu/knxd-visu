@@ -13,7 +13,8 @@ const routes: Routes = [
         path: 'visu',
         component: VisuComponent,
         children: [
-            { path: '', component: DashboardComponent },
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+            { path: 'dashboard', component: DashboardComponent },
             { path: 'bus-monitor', component: BusMonitorComponent },
             {
                 path: 'masterdata',
