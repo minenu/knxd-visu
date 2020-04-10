@@ -44,6 +44,15 @@
         padding: 0 16px;
     }
 
+    /// Rooms
+    visu-rooms {
+        .status-bar {
+            width: 100%;
+            font-size: 13px;
+            padding: 8px;
+        }
+    }
+
     // Table Styles
     .table-container {
         overflow: auto;
@@ -98,6 +107,10 @@
     // MAT CHIP LIST
     input.mat-chip-input {
         margin: 4px 0 !important;
+    }
+
+    .mat-grid-tile {
+        background: if($is-dark-theme, map-get($mat-grey, A100), map-get($mat-grey, 300));
     }
 }
 
