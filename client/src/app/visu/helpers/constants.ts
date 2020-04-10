@@ -9,7 +9,7 @@ export const SOCKET_ACTIONS: string[] = [
 ];
 
 export const CONTROL_TYPES: string[] = [
-    'TOGGLE', 'UP_DOWN', 'VALUE'
+    'TOGGLE', 'UP_DOWN', 'VALUE', 'SLIDE'
 ];
 
 export const CONTROL_DEF_ICONS: string[] = [
@@ -27,7 +27,7 @@ export const DEFAULT_ROOMS: Room[] = [
     { 
         name: 'Küche',
         icon: 'kitchen',
-        tempGad: '2/5/0',
+        temperatureGad: '2/5/0',
         lightGads: ['0/2/3'],
         order: 1,
         floor: 'Erdgeschoß'
@@ -35,7 +35,7 @@ export const DEFAULT_ROOMS: Room[] = [
     { 
         name: 'Esszimmer',
         icon: 'local_dining',
-        tempGad: '2/5/1',
+        temperatureGad: '2/5/1',
         lightGads: ['0/0/3'],
         order: 2,
         floor: 'Erdgeschoß'
@@ -50,7 +50,7 @@ export const DEFAULT_ROOMS: Room[] = [
     { 
         name: 'Wohnzimmer',
         icon: 'tv',
-        tempGad: '2/5/2',
+        temperatureGad: '2/5/2',
         order: 3,
         floor: 'Erdgeschoß'
     },
@@ -58,6 +58,7 @@ export const DEFAULT_ROOMS: Room[] = [
         name: 'Büro',
         icon: 'home_work',
         lightGads: ['0/2/0'],
+        jalousieGads: ['1/4/0', '1/4/1'],
         order: 5,
         floor: 'Erdgeschoß'
     },
@@ -65,35 +66,35 @@ export const DEFAULT_ROOMS: Room[] = [
     { 
         name: 'KiZi Nord',
         icon: 'person_pin',
-        tempGad: '2/5/5',
+        temperatureGad: '2/5/5',
         order: 10,
         floor: 'Obergeschoß'
     },
     { 
         name: 'KiZi Süd',
         icon: 'person_pin',
-        tempGad: '2/5/6',
+        temperatureGad: '2/5/6',
         order: 11,
         floor: 'Obergeschoß'
     },
     { 
         name: 'Bad',
         icon: 'hot_tub',
-        tempGad: '2/5/4',
+        temperatureGad: '2/5/4',
         order: 12,
         floor: 'Obergeschoß'
     },
     { 
         name: 'Schlafzimmer',
         icon: 'king_bed',
-        tempGad: '2/5/7',
+        temperatureGad: '2/5/7',
         order: 13,
         floor: 'Obergeschoß'
     },
     {
         name: 'Gang OG',
         icon: 'double_arrow',
-        tempGad: '2/5/8',
+        temperatureGad: '2/5/8',
         order: 14,
         floor: 'Obergeschoß'
     }

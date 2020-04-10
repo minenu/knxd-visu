@@ -3,6 +3,8 @@ import { ControlDef, ControlValue, GroupSocketMessage } from '../../models';
 import * as _ from 'lodash';
 
 export abstract class AbstractControl {
+    @HostBinding('class.w-100') w100 = true;
+
     @Input() controlDef: ControlDef;
     @Input() controlValues: ControlValue[];
     @Output() groupSocketMessage = new EventEmitter<Partial<GroupSocketMessage>>();
@@ -13,7 +15,15 @@ export abstract class AbstractControl {
     get hideLabel(): boolean {
         return this._hideLabel;
     }
-    private _hideLabel: boolean;
+    private _hideLabel = false;
+
+    @Input() set hideIcon(val: boolean) {
+        this._hideIcon = true;
+    }
+    get hideIcon(): boolean {
+        return this._hideIcon;
+    }
+    private _hideIcon = false;
     
     value: any;
 

@@ -24,6 +24,9 @@
     .border-top { border-top: solid 1px #ccc; }
 
     .bg-default { background-color: mat-color($background, background) }
+    .bg-gray { 
+        background-color: if($is-dark-theme, map-get($mat-grey, A100), map-get($mat-grey, 300));
+    }
     .bg-accent { background-color: mat-color($accent) }
     .bg-app-bar { background-color: mat-color($background, app-bar) }
 
@@ -50,6 +53,12 @@
             width: 100%;
             font-size: 13px;
             padding: 8px;
+        }
+    }
+
+    visu-room {
+        .mat-tab-header {
+            display: none !important;
         }
     }
 

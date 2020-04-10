@@ -25,6 +25,7 @@ import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { HomeComponent } from './containers/home/home.component';
 import { LoggingComponent } from './containers/logging/logging.component';
 import { MasterDataComponent } from './containers/masterdata/masterdata.component';
+import { RoomComponent } from './containers/room/room.component';
 import { RoomsComponent } from './containers/rooms/rooms.component';
 const CONTAINERS: Type<any>[] = [
     VisuComponent,
@@ -34,6 +35,7 @@ const CONTAINERS: Type<any>[] = [
     HomeComponent,
     LoggingComponent,
     MasterDataComponent,
+    RoomComponent,
     RoomsComponent
 ];
 
@@ -87,7 +89,8 @@ const COMPONENTS: Type<any>[] = [
     entryComponents: [
         ConfirmComponent,
         ConnectionLostComponent,
-        ControlDefFormComponent
+        ControlDefFormComponent,
+        RoomComponent
     ],
     providers: [
         ApiService,

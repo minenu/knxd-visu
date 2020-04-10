@@ -21,13 +21,13 @@
         <h3 matSubheader>{{ floor }}</h3>
 
         <mat-grid-list [cols]="this.form.get('cols').value" rowHeight="1:1">
-            <mat-grid-tile *ngFor="let room of getRoomsByFloor(floor)">
+            <mat-grid-tile *ngFor="let room of getRoomsByFloor(floor)" (click)="showRoom(room)">
                 <div fxLayout="column" fxLayoutAlign="space-between center" style="height: 100%; width: 100%">
                     
                     <div class="status-bar" fxLayout fxLayoutAlign="space-between center">
                         <span>{{ room.name }}</span>
-                        <span *ngIf="getValue(room.tempGad)">
-                            <b>{{ getValue(room.tempGad) }}</b><span>{{ getControlDef(room.tempGad)?.suffix }}</span>
+                        <span *ngIf="getValue(room.temperatureGad)">
+                            <b>{{ getValue(room.temperatureGad) }}</b><span>{{ getControlDef(room.temperatureGad)?.suffix }}</span>
                         </span>
                     </div>
                     
@@ -38,12 +38,12 @@
                     </div>
                     <div class="status-bar">
                         <div style="margin: 0 8px" fxLayout fxLayoutAlign="space-between center" *ngFor="let lightControlDef of getControlDefs(room.lightGads)">
-                            <span>{{ lightControlDef.label }}</span>
-                            <visu-toggle 
+                            <visu-switch-control
+                                hideIcon
                                 [controlDef]="lightControlDef" 
                                 [controlValues]="controlValues$ | async"
                                 (groupSocketMessage)="groupSocketMessage($event)">
-                            </visu-toggle>
+                            </visu-switch-control>
                         </div>
                     </div>
                 </div>

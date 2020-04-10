@@ -17,5 +17,9 @@
         (groupSocketMessage)="groupSocketMessage.emit($event)">
     </visu-up-down-control>
     
-    <!--visu-slide-control *ngSwitchCase="'DPT5'" [controlDef]="controlDef"></visu-slide-control-->
+    <visu-slide-control *ngSwitchCase="'SLIDE'" 
+        [controlValues]="controlValues"
+        [controlDef]="controlDef"
+        (groupSocketMessage)="groupSocketMessage.emit($event)">
+    </visu-slide-control>
 </ng-container>

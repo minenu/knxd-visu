@@ -1,0 +1,63 @@
+<mat-tab-group [selectedIndex]="activeTabIndex$ | async">
+    <mat-tab *ngFor="let room of data.rooms">
+        <ng-template matTabContent>
+            <mat-toolbar color="accent" [ngStyle.gt-xs]="{ minWidth: '450px' }">
+                <div fxLayout fxLayoutAlign="space-between center" class="w-100">
+                    <div fxLyout fxLayoutAlign="start center" fxLayoutGap="12px">
+                        <mat-icon>{{ room?.icon }}</mat-icon>
+                        <span>{{ room?.name }}</span>
+                    </div>
+                    <div>
+                        <visu-value-control hideLabel
+                            [controlDef]="getControlDef(room.temperatureGad)"
+                            [controlValues]="controlValues$ | async">
+                        </visu-value-control>
+                    </div>
+                </div>
+            </mat-toolbar>
+
+            <div class="bg-gray" ngClass.xs="w-100vw p-1" ngClass.gt-xs="py-2"
+                [ngStyle.gt-xs]="{ minHeight: '350px' }"
+                fxLayout="column" fxLayoutAlign="space-between">
+
+                <mat-list>
+                    <mat-list-item *ngFor="let controlDef of getControlDefs(room.temperatureGad)">
+                        <visu-value-control [controlDef]="controlDef"
+                            [controlValues]="controlValues$ | async"
+                            (groupSocketMessage)="groupSocketMessage($event)">
+                        </visu-value-control>
+                    </mat-list-item>
+
+                    <mat-list-item *ngFor="let controlDef of getControlDefs(room.lightGads)">
+                        <visu-switch-control [controlDef]="controlDef"
+                            [controlValues]="controlValues$ | async"
+                            (groupSocketMessage)="groupSocketMessage($event)">
+                        </visu-switch-control>
+                    </mat-list-item>
+
+                    <mat-list-item *ngFor="let controlDef of getControlDefs(room.jalousieGads)">
+                        <visu-slide-control [controlDef]="controlDef"
+                            [controlValues]="controlValues$ | async"
+                            (groupSocketMessage)="groupSocketMessage($event)">
+                        </visu-slide-control>
+                    </mat-list-item>
+                </mat-list>
+
+            </div>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>
+
+<div class="bg-app-bar" fxLayout fxLayoutAlign="space-between center" ngClass.gt-xs="p-2" ngClass.xs="p-1 pt-2">
+    <div>
+        <button mat-icon-button (click)="prevRoom()">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <button mat-icon-button (click)="nextRoom()">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+    </div>
+    <button mat-raised-button (click)="dismiss()">
+        Close
+    </button>
+</div>

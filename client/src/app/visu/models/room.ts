@@ -1,8 +1,9 @@
 export interface Room {
     name: string;
     icon?: string;
-    tempGad?: string;
+    temperatureGad?: string;
     lightGads?: string[];
+    jalousieGads?: string[];
     order?: number;
     floor?: string;
 }

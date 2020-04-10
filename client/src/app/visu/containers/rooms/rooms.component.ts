@@ -9,6 +9,8 @@ import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SocketService } from '../../services/socket.service';
+import { ContentOverlayService } from '../../services/content-overlay.service';
+import { RoomComponent } from '../room/room.component';
 
 @Component({
     selector: 'visu-rooms',
@@ -36,7 +38,8 @@ export class RoomsComponent implements OnInit {
     constructor(
         private store: Store<fromVisu.AppState>,
         private breakpointObserver: BreakpointObserver,
-        private socketService: SocketService
+        private socketService: SocketService,
+        private overlay: ContentOverlayService
     ) {}
 
     ngOnInit(): void {
@@ -85,5 +88,15 @@ export class RoomsComponent implements OnInit {
             const controlDef = this.getControlDef(gad);
             return controlValueFormatter(controlDef)(controlValue.val);
         }
+    }
+
+    showRoom(room: Room): any {
+        this.overlay.open({
+            component: RoomComponent,
+            data: {
+                room,
+                rooms: this.rooms
+            }
+        });
     }
 }
