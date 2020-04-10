@@ -28,6 +28,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 const SHARED: Type<any>[] = [
     /// Angular Commons
@@ -43,6 +44,7 @@ const SHARED: Type<any>[] = [
     /// Material
     MatAutocompleteModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
     MatChipsModule,

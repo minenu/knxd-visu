@@ -1,0 +1,22 @@
+<div fxLayout fxLayoutGap="8px" fxLayoutAlign="space-between center">
+    <div fxLayout fxLayoutGap="12px" fxLayoutAlign="start center" *ngIf="!hideLabel">
+        <mat-icon>{{ controlDef?.icon }}</mat-icon>
+        <span>{{ controlDef?.label }}</span>
+    </div>
+    <div>
+        <button mat-icon-button (click)="write(0)">
+            <mat-icon>keyboard_arrow_up</mat-icon>
+        </button>
+        <button mat-icon-button (click)="write(1)">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+    </div>
+    <!--mat-button-toggle-group (change)="change($event)" appearance="legacy">
+        <mat-button-toggle value="0" aria-label="Up">
+            <mat-icon>keyboard_arrow_up</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle value="1" aria-label="Up">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+        </mat-button-toggle>
+    </mat-button-toggle-group-->
+</div>

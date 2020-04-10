@@ -1,15 +1,21 @@
-<ng-container [ngSwitch]="controlDef.type">
-    <visu-switch-control *ngSwitchCase="'DPT1'" 
+<ng-container [ngSwitch]="controlDef.controlType">
+    <visu-switch-control *ngSwitchCase="'TOGGLE'" 
         [controlValues]="controlValues"
         [controlDef]="controlDef"
         (groupSocketMessage)="groupSocketMessage.emit($event)">
     </visu-switch-control>
     
-    <visu-value-control *ngSwitchCase="'DPT9'"
+    <visu-value-control *ngSwitchCase="'VALUE'"
         [controlValues]="controlValues"
         [controlDef]="controlDef"
         (groupSocketMessage)="groupSocketMessage.emit($event)">
     </visu-value-control>
+
+    <visu-up-down-control *ngSwitchCase="'UP_DOWN'"
+        [controlValues]="controlValues"
+        [controlDef]="controlDef"
+        (groupSocketMessage)="groupSocketMessage.emit($event)">
+    </visu-up-down-control>
     
     <!--visu-slide-control *ngSwitchCase="'DPT5'" [controlDef]="controlDef"></visu-slide-control-->
 </ng-container>

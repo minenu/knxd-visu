@@ -8,6 +8,10 @@ export const SOCKET_ACTIONS: string[] = [
     'write', 'read'
 ];
 
+export const CONTROL_TYPES: string[] = [
+    'TOGGLE', 'UP_DOWN', 'VALUE'
+];
+
 export const CONTROL_DEF_ICONS: string[] = [
     'ac_unit',
     'wb_incandescent',

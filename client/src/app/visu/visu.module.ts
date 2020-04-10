@@ -48,6 +48,7 @@ import { ControlWrapperComponent } from './components/controls/control-wrapper/c
 import { SlideControlComponent } from './components/controls/slide-control/slide-control.component';
 import { SwitchControlComponent } from './components/controls/switch-control/switch-control.component';
 import { ToggleComponent } from './components/controls/toggle/toggle.component';
+import { UpDownControlComponent } from './components/controls/up-down-control/up-down-control.component';
 import { ValueControlComponent } from './components/controls/value-control/value-control.component';
 const COMPONENTS: Type<any>[] = [
     BusControllerComponent,
@@ -62,6 +63,7 @@ const COMPONENTS: Type<any>[] = [
     SlideControlComponent,
     SwitchControlComponent,
     ToggleComponent,
+    UpDownControlComponent,
     ValueControlComponent
 ];
 

@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Optional, Inject } from '@angular/core';
-import { ControlDef, Room } from '../../models';
+import { ControlDef } from '../../models';
 import { FormGroup, FormControl, Validators, FormArray, ValidatorFn } from '@angular/forms';
 import { gadValidator, validOption, getErrorMessage, isValidGad, uniqueValidator } from '../../helpers/validators';
-import { DATA_POINT_TYPES, CONTROL_DEF_ICONS } from '../../helpers/constants';
+import { DATA_POINT_TYPES, CONTROL_DEF_ICONS, CONTROL_TYPES } from '../../helpers/constants';
 import * as _ from 'lodash';
 import { Observable, Subscription, Subject, BehaviorSubject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -25,19 +25,21 @@ export class ControlDefFormComponent implements OnInit {
         room: new FormControl(),
         category: new FormControl(),
         icon: new FormControl(CONTROL_DEF_ICONS[0], [ Validators.required ]),
-        suffix: new FormControl()
+        suffix: new FormControl(),
+        controlType: new FormControl('TOGGLE')
     });
 
     types = DATA_POINT_TYPES;
     icons = CONTROL_DEF_ICONS;
+    controlTypes = CONTROL_TYPES;
 
     viewMode = 'DIALOG';    // DIALOG | OVERLAY
     filteredIcons$: Observable<string[]>;
-    filteredRooms$: Observable<Room[]>;
+    filteredRooms$: Observable<string[]>;
     filteredCategories$: Observable<string[]>;
     readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-    rooms: Room[];
+    private rooms: string[];
     private categories: string[];
     private subscriptions: Subscription[] = [];
 
@@ -47,11 +49,10 @@ export class ControlDefFormComponent implements OnInit {
         @Optional() private dialogRef: MatDialogRef<ControlDefFormComponent>,
         @Optional() @Inject(MAT_DIALOG_DATA) private data: {
             controlDef?: ControlDef,
-            controlDefs: ControlDef[],
-            rooms: Room[]
+            controlDefs: ControlDef[]
         }
     ) {
-        this.rooms = Array.isArray(this.data.rooms) ? this.data.rooms : [];
+        this.rooms = _.uniq(this.data.controlDefs.map(cd => cd.room));
         this.categories = _.uniq(this.data.controlDefs.map(cd => cd.category));
 
         /// Set Validator
@@ -80,6 +81,11 @@ export class ControlDefFormComponent implements OnInit {
         this.filteredIcons$ = this.form.get('icon').valueChanges.pipe(
             startWith(''),
             map(text => this.icons.filter(icon => new RegExp(text, 'i').test(icon)))
+        );
+
+        this.filteredRooms$ = this.form.get('room').valueChanges.pipe(
+            startWith(''),
+            map(text => this.rooms.filter(room => new RegExp(text, 'i').test(room)))
         );
 
         /// Enable/Disable controls

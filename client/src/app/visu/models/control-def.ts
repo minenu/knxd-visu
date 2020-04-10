@@ -5,7 +5,7 @@ export class ControlDef {
     category: string;
     label: string;
     type: string;
-
+    controlType: string;
     listenerGads: string[];
 
     /// Options
@@ -21,6 +21,7 @@ export class ControlDef {
         listenerGads?: string[];
         icon?: string;
         suffix?: string;
+        controlType?: 'TOGGLE' | 'UP_DOWN' | 'VALUE';
     }) {
         this.gad = args.gad;
         this.room = args.room || null;
@@ -30,5 +31,6 @@ export class ControlDef {
         this.listenerGads = args.listenerGads || [];
         this.icon = args.icon;
         this.suffix = args.suffix;
+        this.controlType = args.controlType || 'TOGGLE';
     }
 }

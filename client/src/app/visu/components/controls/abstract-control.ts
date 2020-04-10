@@ -6,6 +6,14 @@ export abstract class AbstractControl {
     @Input() controlDef: ControlDef;
     @Input() controlValues: ControlValue[];
     @Output() groupSocketMessage = new EventEmitter<Partial<GroupSocketMessage>>();
+
+    @Input() set hideLabel(val: boolean) {
+        this._hideLabel = true;
+    }
+    get hideLabel(): boolean {
+        return this._hideLabel;
+    }
+    private _hideLabel: boolean;
     
     value: any;
 
