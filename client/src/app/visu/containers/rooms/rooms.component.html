@@ -1,0 +1,53 @@
+<div ngClass.xs="px-2 py-1" ngClass.gt-xs="p-3" fxLayout fxLayoutAlign="space-between center">
+    <div>
+        <div class="mat-h1 my-0">Rooms</div>
+        <span class="mat-small muted">
+            <b>{{ (rooms$ | async)?.length }}</b> rooms found.
+        </span>
+    </div>
+    <form [formGroup]="form">
+        <mat-form-field style="width: 60px">
+            <mat-label>Columns</mat-label>
+            <mat-select formControlName="cols">
+                <mat-option *ngFor="let col of [2,3,4,5,6,7,8]" [value]="col">{{ col }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+</div>
+
+<div ngClass.gt-xs="px-3">
+    
+    <ng-container *ngFor="let floor of floors$ | async">
+        <h3 matSubheader>{{ floor }}</h3>
+
+        <mat-grid-list [cols]="this.form.get('cols').value" rowHeight="1:1">
+            <mat-grid-tile *ngFor="let room of getRoomsByFloor(floor)">
+                <div fxLayout="column" fxLayoutAlign="space-between center" style="height: 100%; width: 100%">
+                    
+                    <div class="status-bar" fxLayout fxLayoutAlign="space-between center">
+                        <span>{{ room.name }}</span>
+                        <span *ngIf="getValue(room.tempGad)">
+                            <b>{{ getValue(room.tempGad) }}</b><span>{{ getControlDef(room.tempGad)?.suffix }}</span>
+                        </span>
+                    </div>
+                    
+                    <div fxLayout="column" fxLayoutAlign="center center">
+                        <div style="font-size: 60px">
+                            <mat-icon inline color="primary">{{ room.icon }}</mat-icon>
+                        </div>
+                    </div>
+                    <div class="status-bar">
+                        <div style="margin: 0 8px" fxLayout fxLayoutAlign="space-between center" *ngFor="let lightControlDef of getControlDefs(room.lightGads)">
+                            <span>{{ lightControlDef.label }}</span>
+                            <visu-toggle 
+                                [controlDef]="lightControlDef" 
+                                [controlValues]="controlValues$ | async"
+                                (groupSocketMessage)="groupSocketMessage($event)">
+                            </visu-toggle>
+                        </div>
+                    </div>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </ng-container>
+</div>

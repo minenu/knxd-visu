@@ -5,6 +5,7 @@ import { first, map, filter } from 'rxjs/operators';
 import * as fromVisu from '../../reducers';
 import * as ControlDefActions from '../../actions/control-def.actions';
 import * as LoggingActions from '../../actions/logging.actions';
+import * as RoomActions from '../../actions/room.actions';
 import { SocketService } from '../../services/socket.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -26,6 +27,7 @@ export class VisuComponent implements OnInit, OnDestroy {
 
     loggingGads$ = this.store.pipe(select(fromVisu.selectLoggingGads));
     controlDefs$ = this.store.pipe(select(fromVisu.selectAllControlDefs));
+    rooms$ = this.store.pipe(select(fromVisu.selectAllRooms));
     now$ = timer(0, 1000).pipe(map(() => new Date()));
 
     mobileQuery: MediaQueryList;
@@ -67,6 +69,13 @@ export class VisuComponent implements OnInit, OnDestroy {
                 this.store.dispatch(ControlDefActions.load());
             }
         });
+
+        /// Load Rooms
+        this.rooms$.pipe(first()).subscribe(rooms => {
+            if (!rooms.length) {
+                this.store.dispatch(RoomActions.load());
+            }
+        })
 
         /// Check for Connection
         this.subscriptions.push(

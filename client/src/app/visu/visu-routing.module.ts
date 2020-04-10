@@ -7,6 +7,7 @@ import { BusMonitorComponent } from './containers/bus-monitor/bus-monitor.compon
 import { VisuComponent } from './containers/visu/visu.component';
 import { LoggingComponent } from './containers/logging/logging.component';
 import { ControlDefinitionsComponent } from './containers/control-definitions/control-definitions.component';
+import { RoomsComponent } from './containers/rooms/rooms.component';
 
 const routes: Routes = [
     {
@@ -15,6 +16,7 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent },
+            { path: 'rooms', component: RoomsComponent },
             { path: 'bus-monitor', component: BusMonitorComponent },
             {
                 path: 'masterdata',

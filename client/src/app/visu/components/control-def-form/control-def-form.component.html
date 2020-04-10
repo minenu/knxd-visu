@@ -39,13 +39,10 @@
 
         <mat-form-field>
             <mat-label>Room</mat-label>
-            <input type="text" matInput formControlName="room" [matAutocomplete]="roomsAutocomplete">
-            <mat-error>{{ formError('room') }}</mat-error>
+            <mat-select formControlName="room">
+                <mat-option *ngFor="let room of rooms" [value]="room.name">{{ room.name }}</mat-option>
+            </mat-select>
         </mat-form-field>
-
-        <mat-autocomplete #roomsAutocomplete="matAutocomplete">
-            <mat-option *ngFor="let option of filteredRooms$ | async" [value]="option">{{ option }}</mat-option>
-        </mat-autocomplete>
 
         <mat-form-field>
             <mat-label>Category</mat-label>

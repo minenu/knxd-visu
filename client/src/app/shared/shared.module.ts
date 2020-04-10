@@ -25,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
@@ -48,6 +49,7 @@ const SHARED: Type<any>[] = [
     MatDialogModule,
     MatExpansionModule,
     MatFormFieldModule,
+    MatGridListModule,
     MatIconModule,
     MatInputModule,
     MatListModule,

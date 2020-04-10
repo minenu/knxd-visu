@@ -20,10 +20,19 @@
             [fixedInViewport]="mobileQuery.matches"
             fixedTopGap="56"
             [opened]="mobileQuery.matches ? false : true">
+
+            <div class="visu-sidenav-header">
+
+            </div>
+
             <mat-nav-list>
                 <a mat-list-item (click)="navigate(['dashboard'])">
                     <mat-icon>view_quilt</mat-icon>
                     <span class="pl-1">Dashboard</span>
+                </a>
+                <a mat-list-item (click)="navigate(['rooms'])">
+                    <mat-icon>room</mat-icon>
+                    <span class="pl-1">Rooms</span>
                 </a>
                 <a mat-list-item (click)="navigate(['bus-monitor'])">
                     <mat-icon>laptop</mat-icon>
@@ -34,6 +43,7 @@
                     <span class="pl-1">Master Data</span>
                 </a>
             </mat-nav-list>
+
         </mat-sidenav>
 
         <mat-sidenav-content fxLayout="column">

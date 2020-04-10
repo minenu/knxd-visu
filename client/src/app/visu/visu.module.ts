@@ -15,6 +15,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { ControlDefEffects } from './effects/control-def.effects';
 import { LoggingEffects } from './effects/logging.effects';
 import { MessageEffects } from './effects/message.effects';
+import { RoomEffects } from './effects/room.effects';
 
 /// CONTAINERS
 import { VisuComponent } from './containers/visu/visu.component';
@@ -24,6 +25,7 @@ import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { HomeComponent } from './containers/home/home.component';
 import { LoggingComponent } from './containers/logging/logging.component';
 import { MasterDataComponent } from './containers/masterdata/masterdata.component';
+import { RoomsComponent } from './containers/rooms/rooms.component';
 const CONTAINERS: Type<any>[] = [
     VisuComponent,
     BusMonitorComponent,
@@ -31,7 +33,8 @@ const CONTAINERS: Type<any>[] = [
     DashboardComponent,
     HomeComponent,
     LoggingComponent,
-    MasterDataComponent
+    MasterDataComponent,
+    RoomsComponent
 ];
 
 /// COMPONENTS
@@ -44,6 +47,7 @@ import { GroupSocketMessageListComponent } from './components/group-socket-messa
 import { ControlWrapperComponent } from './components/controls/control-wrapper/control-wrapper.component';
 import { SlideControlComponent } from './components/controls/slide-control/slide-control.component';
 import { SwitchControlComponent } from './components/controls/switch-control/switch-control.component';
+import { ToggleComponent } from './components/controls/toggle/toggle.component';
 import { ValueControlComponent } from './components/controls/value-control/value-control.component';
 const COMPONENTS: Type<any>[] = [
     BusControllerComponent,
@@ -57,6 +61,7 @@ const COMPONENTS: Type<any>[] = [
     ControlWrapperComponent,
     SlideControlComponent,
     SwitchControlComponent,
+    ToggleComponent,
     ValueControlComponent
 ];
 
@@ -69,7 +74,8 @@ const COMPONENTS: Type<any>[] = [
         EffectsModule.forFeature([
             ControlDefEffects,
             LoggingEffects,
-            MessageEffects
+            MessageEffects,
+            RoomEffects
         ])
     ],
     declarations: [

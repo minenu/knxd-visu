@@ -2,12 +2,14 @@ import { createSelector } from '@ngrx/store';
 import * as fromControlDef from './control-def.reducer';
 import * as fromControlValue from './control-value.reducer';
 import * as fromLogging from './logging.reducer';
+import * as fromRoom from './room.reducer';
 import * as fromSocket from './socket.reducer';
 
 export interface VisuState {
     controlDef: fromControlDef.State;
     controlValue: fromControlValue.State;
     logging: fromLogging.State;
+    room: fromRoom.State;
     socket: fromSocket.State;
 }
 
@@ -19,6 +21,7 @@ export const reducers = {
     controlDef: fromControlDef.reducer,
     controlValue: fromControlValue.reducer,
     logging: fromLogging.reducer,
+    room: fromRoom.reducer,
     socket: fromSocket.reducer
 };
 
@@ -48,7 +51,7 @@ export const selectSelectedControlDef = createSelector(
 );
 
 /**************************************************************
- * CONTROL Value
+ * CONTROL VALUE
  **************************************************************/
 const selectControlValueState = createSelector(
     selectVisuState,
@@ -73,6 +76,19 @@ export const selectLoggingGads = createSelector(
     selectLoggingState,
     (state: fromLogging.State) => state.loggingGads
 );
+
+/**************************************************************
+ * ROOM
+ **************************************************************/
+const selectRoomState = createSelector(
+    selectVisuState,
+    (state: VisuState) => state.room
+);
+
+/// Map EntityAdapter
+export const {
+    selectAll: selectAllRooms
+} = fromRoom.adapter.getSelectors(selectRoomState);
 
 /**************************************************************
  * SOCKETS

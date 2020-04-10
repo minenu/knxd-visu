@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Optional, Inject } from '@angular/core';
-import { ControlDef } from '../../models';
+import { ControlDef, Room } from '../../models';
 import { FormGroup, FormControl, Validators, FormArray, ValidatorFn } from '@angular/forms';
 import { gadValidator, validOption, getErrorMessage, isValidGad, uniqueValidator } from '../../helpers/validators';
 import { DATA_POINT_TYPES, CONTROL_DEF_ICONS } from '../../helpers/constants';
@@ -33,11 +33,11 @@ export class ControlDefFormComponent implements OnInit {
 
     viewMode = 'DIALOG';    // DIALOG | OVERLAY
     filteredIcons$: Observable<string[]>;
-    filteredRooms$: Observable<string[]>;
+    filteredRooms$: Observable<Room[]>;
     filteredCategories$: Observable<string[]>;
     readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-    private rooms: string[];
+    rooms: Room[];
     private categories: string[];
     private subscriptions: Subscription[] = [];
 
@@ -47,10 +47,11 @@ export class ControlDefFormComponent implements OnInit {
         @Optional() private dialogRef: MatDialogRef<ControlDefFormComponent>,
         @Optional() @Inject(MAT_DIALOG_DATA) private data: {
             controlDef?: ControlDef,
-            controlDefs: ControlDef[]
+            controlDefs: ControlDef[],
+            rooms: Room[]
         }
     ) {
-        this.rooms = _.uniq(this.data.controlDefs.map(cd => cd.room));
+        this.rooms = Array.isArray(this.data.rooms) ? this.data.rooms : [];
         this.categories = _.uniq(this.data.controlDefs.map(cd => cd.category));
 
         /// Set Validator
@@ -79,11 +80,6 @@ export class ControlDefFormComponent implements OnInit {
         this.filteredIcons$ = this.form.get('icon').valueChanges.pipe(
             startWith(''),
             map(text => this.icons.filter(icon => new RegExp(text, 'i').test(icon)))
-        );
-
-        this.filteredRooms$ = this.form.get('room').valueChanges.pipe(
-            startWith(''),
-            map(text => this.rooms.filter(room => new RegExp(text, 'i').test(room)))
         );
 
         /// Enable/Disable controls

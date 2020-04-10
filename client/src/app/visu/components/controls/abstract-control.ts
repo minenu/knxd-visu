@@ -3,11 +3,9 @@ import { ControlDef, ControlValue, GroupSocketMessage } from '../../models';
 import * as _ from 'lodash';
 
 export abstract class AbstractControl {
-    @HostBinding('class') class = 'w-100';
-
     @Input() controlDef: ControlDef;
     @Input() controlValues: ControlValue[];
-    @Output() groupSocketMessage = new EventEmitter<GroupSocketMessage>();
+    @Output() groupSocketMessage = new EventEmitter<Partial<GroupSocketMessage>>();
     
     value: any;
 

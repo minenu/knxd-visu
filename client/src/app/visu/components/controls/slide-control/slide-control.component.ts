@@ -1,7 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, forwardRef, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, forwardRef } from '@angular/core';
 import { AbstractControl } from '../abstract-control';
-import { SocketService } from '../../../services/socket.service';
-import * as _ from 'lodash';
 import { MatSliderChange } from '@angular/material/slider';
 
 @Component({
@@ -14,40 +12,13 @@ import { MatSliderChange } from '@angular/material/slider';
     }]
 })
 
-export class SlideControlComponent extends AbstractControl implements OnInit, OnDestroy {
-    @Input() suffix: string;
-
-    constructor(
-        public socketService: SocketService,
-        public cdr: ChangeDetectorRef
-    ) {
-        super(socketService, cdr);
-    }
-
-    ngOnInit(): void {}
-
-    ngOnDestroy(): void {
-        super.ngOnDestroy();
-    }
+export class SlideControlComponent extends AbstractControl {
 
     change(value: MatSliderChange): void {
-        this.socketService.groupSocketMessage({
+        this.groupSocketMessage.emit({
             dest: this.controlDef.gad,
             type: this.controlDef.type,
             val: value.value
         });
-    }
-
-    /**
-     * Normalize Value
-     */
-    protected setValue(value: any): void {
-        if (this.controlDef) {
-            if (_.isNumber(value)) {
-                this.value = value;
-            }
-
-            this.cdr.detectChanges();
-        }
     }
 }
