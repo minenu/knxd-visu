@@ -44,8 +44,11 @@ export class RoomsComponent implements OnInit {
 
     ngOnInit(): void {
         this.subscriptions.push(
-            this.breakpointObserver.observe([Breakpoints.Small]).subscribe(result => {
-                console.log('Breakpoints.Small', result);
+            this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall]).subscribe(result => {
+                console.log('R', result);
+                if (result.matches) {
+                    this.form.get('cols').setValue(2);
+                }
             })
         );
 
