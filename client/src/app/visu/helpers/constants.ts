@@ -29,6 +29,7 @@ export const DEFAULT_ROOMS: Room[] = [
         icon: 'kitchen',
         temperatureGad: '2/5/0',
         lightGads: ['0/2/3'],
+        jalousieGads: ['1/4/10', '1/4/11'],
         order: 1,
         floor: 'Erdgeschoß'
     },
@@ -37,6 +38,7 @@ export const DEFAULT_ROOMS: Room[] = [
         icon: 'local_dining',
         temperatureGad: '2/5/1',
         lightGads: ['0/0/3'],
+        jalousieGads: ['1/4/2', '1/4/3', '1/4/4', '1/4/5'],
         order: 2,
         floor: 'Erdgeschoß'
     },
@@ -51,6 +53,7 @@ export const DEFAULT_ROOMS: Room[] = [
         name: 'Wohnzimmer',
         icon: 'tv',
         temperatureGad: '2/5/2',
+        jalousieGads: ['1/4/8', '1/4/9'],
         order: 3,
         floor: 'Erdgeschoß'
     },
@@ -67,6 +70,7 @@ export const DEFAULT_ROOMS: Room[] = [
         name: 'KiZi Nord',
         icon: 'person_pin',
         temperatureGad: '2/5/5',
+        jalousieGads: ['1/5/12', '1/5/13'],
         order: 10,
         floor: 'Obergeschoß'
     },
@@ -74,6 +78,7 @@ export const DEFAULT_ROOMS: Room[] = [
         name: 'KiZi Süd',
         icon: 'person_pin',
         temperatureGad: '2/5/6',
+        jalousieGads: ['1/5/8', '1/5/9', '1/5/10', '1/5/11'],
         order: 11,
         floor: 'Obergeschoß'
     },
@@ -81,6 +86,7 @@ export const DEFAULT_ROOMS: Room[] = [
         name: 'Bad',
         icon: 'hot_tub',
         temperatureGad: '2/5/4',
+        jalousieGads: ['1/5/2', '1/5/3'],
         order: 12,
         floor: 'Obergeschoß'
     },
@@ -88,6 +94,7 @@ export const DEFAULT_ROOMS: Room[] = [
         name: 'Schlafzimmer',
         icon: 'king_bed',
         temperatureGad: '2/5/7',
+        jalousieGads: ['1/5/4', '1/5/5'],
         order: 13,
         floor: 'Obergeschoß'
     },
@@ -95,6 +102,7 @@ export const DEFAULT_ROOMS: Room[] = [
         name: 'Gang OG',
         icon: 'double_arrow',
         temperatureGad: '2/5/8',
+        jalousieGads: ['1/5/0', '1/5/1', '1/5/6', '1/5/7'],
         order: 14,
         floor: 'Obergeschoß'
     }
