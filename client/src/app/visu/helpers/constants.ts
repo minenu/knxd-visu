@@ -28,8 +28,8 @@ export const DEFAULT_ROOMS: Room[] = [
         name: 'Küche',
         icon: 'kitchen',
         temperatureGad: '2/5/0',
-        lightGads: ['0/2/3'],
-        jalousieGads: ['1/4/10', '1/4/11'],
+        lightGads: ['0/2/3', '0/0/11'],
+        jalousieGads: ['1/4/6', '1/4/7'],
         order: 1,
         floor: 'Erdgeschoß'
     },
